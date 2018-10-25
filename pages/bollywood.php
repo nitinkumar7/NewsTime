@@ -1,6 +1,6 @@
 <?php
-
   date_default_timezone_set('Asia/Calcutta');
+  include '../php/bollycmnt.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +11,7 @@
     <meta charset="utf-8" />
     
 	<link rel="stylesheet" type="text/css" href="../css/time.css">
+  <link rel="stylesheet" type="text/css" href="../css/cmntstyle.css">
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script defer="true" src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
@@ -33,7 +34,6 @@
     </script>
 
     <style>
-    *{margin:0px; padding:0px; font-family:Helvetica, Arial, sans-serif;}
 
     /* Full-width input fields */
     input[type=text], input[type=password] {
@@ -67,12 +67,6 @@
         margin: 24px 0 12px 0;
         position: relative;
     }
-    .avatar {
-        width: 200px;
-      height:200px;
-        border-radius: 50%;
-    }
-
     /* The Modal (background) */
     .modal {
       display:none;
@@ -118,15 +112,8 @@
         to {transform: scale(1)}
     }
     </style>
-<!-- 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  
-    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
- --></head>
+
+</head>
 
 <body class="left-column dept news">
 
@@ -251,17 +238,18 @@
           <h4>Want to give reviews?</h4>
           <button onclick="document.getElementById('modal-wrapper').style.display='block'">Login</button>&nbsp;<button onclick="myfunction()">Anonymous</button>
           
-          </div>
-          <br>
-          <?php
-         echo "<form>
-           <input type='hidden' name='uid' value='Anonymous'>
-           <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
-           <textarea name='message'></textarea>
-           <button name='submit' type='submit'>Comment</button>
-         </form>";
-          ?>
-          </div>
+        </div>
+        <br>
+        <?php
+           echo "<form method='POST' action='".setBollyComments($conn)."'>
+             <input type='hidden' name='uid' value='Anonymous'>
+             <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
+             <textarea name='message'></textarea><br>
+             <button name='commentSubmit' type='submit' id='btn2'>Comment</button>
+           </form>";
+            getBollyComments($conn);
+        ?>
+        </div>
 
           
           <div id="modal-wrapper" class="modal">
